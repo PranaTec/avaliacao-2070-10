@@ -23,9 +23,11 @@ if submitted:
         st.success(f"Empresa **{empresa['nome']}** cadastrada!")
         st.markdown(f"""
         <div class="obs-box" style="border-color:#1e3a5f;background:#12203a;">
-            <div class="obs-label" style="color:#93c5fd">Código de acesso — guarde com segurança</div>
-            <div class="obs-text" style="color:#e2e8f0;font-family:monospace;font-size:1rem">{empresa['token_gestor']}</div>
+            <div class="obs-label" style="color:#93c5fd">Código de acesso — copie agora e guarde com segurança</div>
+            <div class="obs-text" style="color:#e2e8f0;font-family:monospace;font-size:1.1rem;letter-spacing:0.05em">{empresa['token_gestor']}</div>
         </div>
         """, unsafe_allow_html=True)
-        st.session_state["token_empresa"] = empresa["token_gestor"]
-        st.switch_page("pages/1_Painel.py")
+        st.warning("Guarde esse código — ele é a única forma de acessar o painel da sua empresa.")
+        if st.button("Já copiei, ir para o painel", type="primary", use_container_width=True):
+            st.session_state["token_empresa"] = empresa["token_gestor"]
+            st.switch_page("pages/1_Painel.py")
