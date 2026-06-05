@@ -127,14 +127,17 @@ if enviado:
             st.session_state.pop("tipo_form", None)
             st.switch_page("pages/3_Resultado.py")
         else:
-            if avaliacao_atualizada["status"] == "completa":
-                st.balloons()
-                st.info("Ambas as partes preencheram. O resultado já está disponível para o gestor.")
-            else:
-                st.info("Avaliação enviada! Aguardando o gestor preencher a parte dele.")
             st.session_state.pop("token_form", None)
             st.session_state.pop("tipo_form", None)
-            st.divider()
-            st.markdown('<p class="page-sub">Você já pode fechar esta página.</p>', unsafe_allow_html=True)
-            if st.button("Preencher outra avaliação", use_container_width=False):
+            st.markdown(f"""
+<div class="instrucao-box">
+<strong>Obrigado, {colab_nome}!</strong><br><br>
+Sua autoavaliação foi registrada com sucesso.<br><br>
+A partir de agora, seu gestor irá analisar as respostas e comparar com a avaliação dele.
+Com base nisso, será agendada uma <strong>sessão de feedback</strong> para conversarem sobre
+os resultados, alinhar percepções e definir juntos os próximos passos do seu desenvolvimento.<br><br>
+Fique à vontade para fechar esta página.
+</div>
+""", unsafe_allow_html=True)
+            if st.button("Preencher outra avaliação"):
                 st.rerun()
